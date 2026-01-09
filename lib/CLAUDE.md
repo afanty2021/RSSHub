@@ -16,6 +16,7 @@ lib 目录是 RSSHub 的核心应用模块，负责：
 - **index.ts** - 应用程序入口，处理集群模式启动
 - **app.ts** - 应用程序代理，确保请求重写器运行
 - **app-bootstrap.tsx** - 应用程序启动配置和中间件注册
+- **app.worker.tsx** - Cloudflare Workers 专用启动配置
 
 ### 启动流程
 1. 加载请求重写器
@@ -42,6 +43,7 @@ lib 目录是 RSSHub 的核心应用模块，负责：
 
 ### 核心依赖
 - **@hono/node-server** - Node.js 服务器适配器
+- **@cloudflare/workers-types** - Cloudflare Workers 类型定义
 - **directory-import** - 动态路由导入
 - **@scalar/hono-api-reference** - API 文档生成
 
@@ -106,6 +108,7 @@ interface Route {
 - `index.ts` - 应用入口
 - `app.ts` - 应用代理
 - `app-bootstrap.tsx` - 启动配置
+- `app.worker.tsx` - Workers 启动配置
 - `config.ts` - 配置管理
 - `registry.ts` - 路由注册
 
@@ -118,6 +121,12 @@ interface Route {
 - `router.js` - 路由器配置
 
 ## 变更记录 (Changelog)
+
+### 2026-01-09 17:30:00
+- ✨ **新增 Workers 支持**: 添加 `app.worker.tsx` 支持 Cloudflare Workers 部署
+- 🔧 **环境绑定**: 支持 Browser Rendering API 和 KV Namespace
+- 📦 **依赖更新**: 添加 `@cloudflare/workers-types` 类型支持
+- 🎯 **边缘优化**: 简化中间件链，移除不适用于 Workers 的组件
 
 ### 2025-12-07 14:11:44
 - ✨ 创建核心模块文档
